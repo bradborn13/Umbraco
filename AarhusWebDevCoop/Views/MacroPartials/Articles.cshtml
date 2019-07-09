@@ -1,0 +1,28 @@
+﻿@inherits Umbraco.Web.Macros.PartialViewMacroPage
+
+@{   var selection = Model.Content.Site().FirstChild("homePage").FirstChild("articlesOverview").Children("articleItem")
+                     .Where(x => x.IsVisible()).OrderBy("CreateDate desc");
+      
+}
+
+    
+	@foreach (var item in selection)
+    {
+
+    
+
+  
+       
+        <div class="card card-body">
+    <h4 class="card-title">@item.GetPropertyValue("articleTitle")</h4>
+    <p class="card-text">@item.GetPropertyValue("articleContent")</p>
+    <div class="flex-row">
+        <a class="card-link"> </a>
+        <a class="card-link"></a>
+    </div>
+</div>
+	
+	
+       
+    
+    }

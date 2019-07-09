@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+
+@{
+    Layout = "Master.cshtml";
+
+}
+<br />
+<br />
+<section class="container">
+    <div class="jumbotron">
+        <h1 class="text-center">Welcome  @CurrentPage.GetPropertyValue("SiteTitle")</h1>
+        <p>  @CurrentPage.GetPropertyValue("MainContent")</p>
+    </div>
+</section>
+
+<br />
+<br />
+
+
+
+
+
+        @Umbraco.RenderMacro("listNewestProjects")

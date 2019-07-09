@@ -1,0 +1,17 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using ContentModels = Umbraco.Web.PublishedContentModels;
+@{
+	Layout = "Master.cshtml";
+}
+    <h3 class ="text-center">Project Name: @CurrentPage.GetPropertyValue("articlesTitle")</h3 >
+<div class="card card-body">
+    <h4 class="card-title">@CurrentPage.GetPropertyValue("articlesBodyText")</h4>
+    <p class="card-text">@CurrentPage.GetPropertyValue("ProjectTitle")</p>
+    <div class="flex-row">
+        <a class="card-link"> </a>
+        <a class="card-link"></a>
+    </div>
+</div>
+    
+    
+

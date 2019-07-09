@@ -1,0 +1,64 @@
+﻿@inherits Umbraco.Web.Mvc.UmbracoTemplatePage
+@using Newtonsoft.Json;
+@using Umbraco.Web.Models;
+@{
+    Layout = "Master.cshtml";
+    var membersService = ApplicationContext.Current.Services.MemberService;
+    var members =membersService.GetMembersByGroup("active");
+
+    <br/>
+    <h4 class="text-center">Active Members</h4>
+    <hr />
+
+    foreach (var member in members)
+    {
+       
+
+
+        <div class="ml-4 clearfix">
+            @if (member.GetValue("photo") != null)
+            {
+                string image = member.GetValue<string>("photo");
+                if (image != null)
+                {
+                    ImageCropDataSet imageCrop  = JsonConvert.DeserializeObject<ImageCropDataSet>(image);
+                    string imagePath = imageCrop.Src.GetCropUrl(width: 100);
+                    <img class="float:left profile-pic" src="@imagePath" alt="@member.Name" />
+
+                }
+                else
+                {
+                    <img class="float-left profile-pic" src=" https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png" />
+
+                }
+            }
+
+
+                </div>
+
+                <br />
+        <div class=" article">
+            <h5>@member.Name</h5>
+            <div class="articlepreview">
+                <strong > Address: </strong> @member.GetValue("address")<span>, </span> @member.GetValue("zip") @member.GetValue("city") <br />
+                <strong>Email: </strong>@member.Email<br />
+                @if (member.GetValue("skills") != null)
+                {
+                    String[] skills = member.GetValue("skills").ToString().Split(',');
+                    string skillString = string.Join(",", from skill in skills select umbraco.library.GetPreValueAsString(Convert.ToInt32(skill)));
+
+                    <strong>Skills: </strong> @skillString<br />
+                }
+                else
+                {
+                    <strong>Skills:</strong><div> NAN</div>  <br/>
+                }
+
+            </div>
+        </div>
+    }
+
+}
+
+
+
